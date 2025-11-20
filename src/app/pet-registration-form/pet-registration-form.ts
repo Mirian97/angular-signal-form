@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ErrorIcon } from '../shared/icons/error-icon';
 
 interface PetFormData {
   name: string;
@@ -16,11 +17,13 @@ interface PetFormData {
 
 @Component({
   selector: 'app-pet-registration-form',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, ErrorIcon],
   templateUrl: './pet-registration-form.html',
 })
 export class PetRegistrationForm {
   private readonly formBuilder = inject(FormBuilder);
+  readonly petTypes = ['Perro', 'Gato', 'Conejo', 'Ave', 'Hamster', 'Otro'];
+  readonly genders = ['Macho', 'Hembra'];
 
   petForm: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
@@ -33,9 +36,6 @@ export class PetRegistrationForm {
     gender: ['', Validators.required],
     observations: [''],
   });
-
-  petTypes = ['Perro', 'Gato', 'Conejo', 'Ave', 'Hamster', 'Otro'];
-  genders = ['Macho', 'Hembra'];
 
   onSubmit(): void {
     if (this.petForm.valid) {

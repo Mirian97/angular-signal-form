@@ -239,16 +239,18 @@
             <label for="birthDate" class="block text-sm font-semibold text-gray-300">
               Fecha de Nacimiento <span class="text-red-400">*</span>
             </label>
-            <input
-              id="birthDate"
-              type="date"
-              formControlName="birthDate"
-              [class]="
-                isFieldInvalid('birthDate')
-                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900 cursor-pointer'
-                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900 cursor-pointer'
-              "
-            />
+            <div class="date-input-wrapper">
+              <input
+                id="birthDate"
+                type="date"
+                formControlName="birthDate"
+                [class]="
+                  isFieldInvalid('birthDate')
+                    ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900 cursor-pointer'
+                    : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900 cursor-pointer'
+                "
+              />
+            </div>
             @if (isFieldInvalid('birthDate')) {
             <p class="text-sm text-red-400 font-medium flex items-center gap-1">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">

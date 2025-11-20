@@ -1,1 +1,29 @@
+<nav class="bg-white shadow-lg border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center space-x-8">
+        <h1 class="text-xl font-bold text-gray-900">Registro de Mascotas</h1>
+        <div class="flex space-x-4">
+          <a
+            routerLink="/reactive-form"
+            routerLinkActive="text-blue-600 border-b-2 border-blue-600"
+            [routerLinkActiveOptions]="{ exact: false }"
+            class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200"
+          >
+            Formulario Reactivo
+          </a>
+          <a
+            routerLink="/signals-form"
+            routerLinkActive="text-blue-600 border-b-2 border-blue-600"
+            [routerLinkActiveOptions]="{ exact: false }"
+            class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200"
+          >
+            Formulario Signals
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
 <router-outlet />

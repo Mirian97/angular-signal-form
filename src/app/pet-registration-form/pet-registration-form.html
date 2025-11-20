@@ -1,21 +1,21 @@
 <div
-  class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4 sm:px-6 lg:px-8"
+  class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-12 px-4 sm:px-6 lg:px-8"
 >
   <div class="max-w-3xl mx-auto">
     <!-- Header Card -->
     <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold text-gray-900 mb-2">Registro de Mascota</h1>
-      <p class="text-gray-600">Completa el formulario para registrar a tu mascota</p>
+      <h1 class="text-4xl font-bold text-gray-100 mb-2">Registro de Mascota</h1>
+      <p class="text-gray-400">Completa el formulario para registrar a tu mascota</p>
     </div>
 
     <!-- Form Card -->
-    <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-gray-100">
+    <div class="bg-gray-800 rounded-2xl shadow-xl p-8 md:p-10 border border-gray-700">
       <form [formGroup]="petForm" (ngSubmit)="onSubmit()" class="space-y-6">
         <!-- First Row -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">
-            <label for="name" class="block text-sm font-semibold text-gray-700">
-              Nombre de la Mascota <span class="text-red-500">*</span>
+            <label for="name" class="block text-sm font-semibold text-gray-300">
+              Nombre de la Mascota <span class="text-red-400">*</span>
             </label>
             <input
               id="name"
@@ -23,13 +23,13 @@
               formControlName="name"
               [class]="
                 isFieldInvalid('name')
-                  ? 'w-full px-4 py-3 border-2 border-red-400 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-red-50'
-                  : 'w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-50 hover:bg-white'
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900'
               "
               placeholder="Ej: Max"
             />
             @if (isFieldInvalid('name')) {
-            <p class="text-sm text-red-600 font-medium flex items-center gap-1">
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
@@ -43,25 +43,25 @@
           </div>
 
           <div class="space-y-2">
-            <label for="type" class="block text-sm font-semibold text-gray-700">
-              Tipo de Mascota <span class="text-red-500">*</span>
+            <label for="type" class="block text-sm font-semibold text-gray-300">
+              Tipo de Mascota <span class="text-red-400">*</span>
             </label>
             <select
               id="type"
               formControlName="type"
               [class]="
                 isFieldInvalid('type')
-                  ? 'w-full px-4 py-3 border-2 border-red-400 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-red-50 cursor-pointer'
-                  : 'w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-50 hover:bg-white cursor-pointer'
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900 cursor-pointer'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900 cursor-pointer'
               "
             >
-              <option value="" class="text-gray-400">Seleccione un tipo</option>
+              <option value="" class="text-gray-500 bg-gray-900">Seleccione un tipo</option>
               @for (type of petTypes; track type) {
-              <option [value]="type" class="text-gray-900">{{ type }}</option>
+              <option [value]="type" class="text-gray-100 bg-gray-800">{{ type }}</option>
               }
             </select>
             @if (isFieldInvalid('type')) {
-            <p class="text-sm text-red-600 font-medium flex items-center gap-1">
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
@@ -78,8 +78,8 @@
         <!-- Second Row -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">
-            <label for="breed" class="block text-sm font-semibold text-gray-700">
-              Raza <span class="text-red-500">*</span>
+            <label for="breed" class="block text-sm font-semibold text-gray-300">
+              Raza <span class="text-red-400">*</span>
             </label>
             <input
               id="breed"
@@ -87,13 +87,13 @@
               formControlName="breed"
               [class]="
                 isFieldInvalid('breed')
-                  ? 'w-full px-4 py-3 border-2 border-red-400 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-red-50'
-                  : 'w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-50 hover:bg-white'
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900'
               "
               placeholder="Ej: Labrador"
             />
             @if (isFieldInvalid('breed')) {
-            <p class="text-sm text-red-600 font-medium flex items-center gap-1">
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
@@ -107,25 +107,25 @@
           </div>
 
           <div class="space-y-2">
-            <label for="gender" class="block text-sm font-semibold text-gray-700">
-              Género <span class="text-red-500">*</span>
+            <label for="gender" class="block text-sm font-semibold text-gray-300">
+              Género <span class="text-red-400">*</span>
             </label>
             <select
               id="gender"
               formControlName="gender"
               [class]="
                 isFieldInvalid('gender')
-                  ? 'w-full px-4 py-3 border-2 border-red-400 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-red-50 cursor-pointer'
-                  : 'w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-50 hover:bg-white cursor-pointer'
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900 cursor-pointer'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900 cursor-pointer'
               "
             >
-              <option value="" class="text-gray-400">Seleccione un género</option>
+              <option value="" class="text-gray-500 bg-gray-900">Seleccione un género</option>
               @for (gender of genders; track gender) {
-              <option [value]="gender" class="text-gray-900">{{ gender }}</option>
+              <option [value]="gender" class="text-gray-100 bg-gray-800">{{ gender }}</option>
               }
             </select>
             @if (isFieldInvalid('gender')) {
-            <p class="text-sm text-red-600 font-medium flex items-center gap-1">
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
@@ -142,8 +142,8 @@
         <!-- Third Row -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">
-            <label for="age" class="block text-sm font-semibold text-gray-700">
-              Edad (años) <span class="text-red-500">*</span>
+            <label for="age" class="block text-sm font-semibold text-gray-300">
+              Edad (años) <span class="text-red-400">*</span>
             </label>
             <input
               id="age"
@@ -151,15 +151,15 @@
               formControlName="age"
               [class]="
                 isFieldInvalid('age')
-                  ? 'w-full px-4 py-3 border-2 border-red-400 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-red-50'
-                  : 'w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-50 hover:bg-white'
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900'
               "
               placeholder="Ej: 3"
               min="0"
               max="30"
             />
             @if (isFieldInvalid('age')) {
-            <p class="text-sm text-red-600 font-medium flex items-center gap-1">
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
@@ -173,7 +173,7 @@
           </div>
 
           <div class="space-y-2">
-            <label for="weight" class="block text-sm font-semibold text-gray-700">
+            <label for="weight" class="block text-sm font-semibold text-gray-300">
               Peso (kg)
             </label>
             <input
@@ -182,15 +182,15 @@
               formControlName="weight"
               [class]="
                 isFieldInvalid('weight')
-                  ? 'w-full px-4 py-3 border-2 border-red-400 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-red-50'
-                  : 'w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-50 hover:bg-white'
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900'
               "
               placeholder="Ej: 15.5"
               min="0"
               step="0.1"
             />
             @if (isFieldInvalid('weight')) {
-            <p class="text-sm text-red-600 font-medium flex items-center gap-1">
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
@@ -207,8 +207,8 @@
         <!-- Fourth Row -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">
-            <label for="color" class="block text-sm font-semibold text-gray-700">
-              Color <span class="text-red-500">*</span>
+            <label for="color" class="block text-sm font-semibold text-gray-300">
+              Color <span class="text-red-400">*</span>
             </label>
             <input
               id="color"
@@ -216,13 +216,13 @@
               formControlName="color"
               [class]="
                 isFieldInvalid('color')
-                  ? 'w-full px-4 py-3 border-2 border-red-400 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-red-50'
-                  : 'w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-50 hover:bg-white'
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900'
               "
               placeholder="Ej: Marrón"
             />
             @if (isFieldInvalid('color')) {
-            <p class="text-sm text-red-600 font-medium flex items-center gap-1">
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
@@ -236,8 +236,8 @@
           </div>
 
           <div class="space-y-2">
-            <label for="birthDate" class="block text-sm font-semibold text-gray-700">
-              Fecha de Nacimiento <span class="text-red-500">*</span>
+            <label for="birthDate" class="block text-sm font-semibold text-gray-300">
+              Fecha de Nacimiento <span class="text-red-400">*</span>
             </label>
             <input
               id="birthDate"
@@ -245,12 +245,12 @@
               formControlName="birthDate"
               [class]="
                 isFieldInvalid('birthDate')
-                  ? 'w-full px-4 py-3 border-2 border-red-400 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-red-50 cursor-pointer'
-                  : 'w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-50 hover:bg-white cursor-pointer'
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900 cursor-pointer'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900 cursor-pointer'
               "
             />
             @if (isFieldInvalid('birthDate')) {
-            <p class="text-sm text-red-600 font-medium flex items-center gap-1">
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
@@ -266,31 +266,31 @@
 
         <!-- Observations -->
         <div class="space-y-2">
-          <label for="observations" class="block text-sm font-semibold text-gray-700">
+          <label for="observations" class="block text-sm font-semibold text-gray-300">
             Observaciones
           </label>
           <textarea
             id="observations"
             formControlName="observations"
             rows="4"
-            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-50 hover:bg-white resize-y min-h-[120px]"
+            class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900 resize-y min-h-[120px]"
             placeholder="Información adicional sobre la mascota..."
           ></textarea>
         </div>
 
         <!-- Action Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
+        <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-700">
           <button
             type="submit"
             [disabled]="petForm.invalid"
-            class="flex-1 px-6 py-3.5 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-md hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed disabled:hover:from-gray-400 disabled:hover:to-gray-500 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+            class="flex-1 px-6 py-3.5 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-md hover:from-blue-500 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed disabled:hover:from-gray-600 disabled:hover:to-gray-700 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
           >
             Registrar Mascota
           </button>
           <button
             type="button"
             (click)="petForm.reset()"
-            class="flex-1 px-6 py-3.5 text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+            class="flex-1 px-6 py-3.5 text-base font-semibold text-gray-200 bg-gray-700 border-2 border-gray-600 rounded-lg hover:bg-gray-600 hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
           >
             Limpiar Formulario
           </button>

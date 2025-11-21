@@ -10,7 +10,7 @@
 
     <!-- Form Card -->
     <div class="bg-gray-800 rounded-2xl shadow-xl p-8 md:p-10 border border-gray-700">
-      <form class="space-y-6">
+      <form class="space-y-6" (submit)="onSubmit($event)" novalidate>
         <!-- First Row -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">
@@ -20,9 +20,19 @@
             <input
               id="name"
               type="text"
+              [field]="petForm.name"
               class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850"
               placeholder="Ej: Max"
             />
+            <!-- @if ( petForm.name().touched() && petForm.name().errors().length > 0 ) { -->
+            @if ( isFieldInvalid('name') ) {
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
+              <error-icon />
+              @for (error of petForm.name().errors(); track $index) {
+              <span>{{ error.message }}</span>
+              }
+            </p>
+            }
           </div>
 
           <div class="space-y-2">
@@ -31,6 +41,7 @@
             </label>
             <select
               id="type"
+              [field]="petForm.type"
               class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850 cursor-pointer"
             >
               <option value="" class="text-gray-500 bg-gray-900">Seleccione un tipo</option>
@@ -38,6 +49,14 @@
               <option [value]="type" class="text-gray-100 bg-gray-800">{{ type }}</option>
               }
             </select>
+            @if ( isFieldInvalid('type') ) {
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
+              <error-icon />
+              @for (error of petForm.type().errors(); track $index) {
+              <span>{{ error.message }}</span>
+              }
+            </p>
+            }
           </div>
         </div>
 
@@ -50,9 +69,18 @@
             <input
               id="breed"
               type="text"
+              [field]="petForm.breed"
               class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850"
               placeholder="Ej: Labrador"
             />
+            @if ( isFieldInvalid('breed') ) {
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
+              <error-icon />
+              @for (error of petForm.breed().errors(); track $index) {
+              <span>{{ error.message }}</span>
+              }
+            </p>
+            }
           </div>
 
           <div class="space-y-2">
@@ -61,6 +89,7 @@
             </label>
             <select
               id="gender"
+              [field]="petForm.gender"
               class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850 cursor-pointer"
             >
               <option value="" class="text-gray-500 bg-gray-900">Seleccione un género</option>
@@ -68,6 +97,14 @@
               <option [value]="gender" class="text-gray-100 bg-gray-800">{{ gender }}</option>
               }
             </select>
+            @if ( isFieldInvalid('gender') ) {
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
+              <error-icon />
+              @for (error of petForm.gender().errors(); track $index) {
+              <span>{{ error.message }}</span>
+              }
+            </p>
+            }
           </div>
         </div>
 
@@ -80,11 +117,18 @@
             <input
               id="age"
               type="number"
+              [field]="petForm.age"
               class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850"
               placeholder="Ej: 3"
-              min="0"
-              max="30"
             />
+            @if ( isFieldInvalid('age') ) {
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
+              <error-icon />
+              @for (error of petForm.age().errors(); track $index) {
+              <span>{{ error.message }}</span>
+              }
+            </p>
+            }
           </div>
 
           <div class="space-y-2">
@@ -94,11 +138,19 @@
             <input
               id="weight"
               type="number"
+              [field]="petForm.weight"
               class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850"
               placeholder="Ej: 15.5"
-              min="0"
               step="0.1"
             />
+            @if ( isFieldInvalid('weight') ) {
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
+              <error-icon />
+              @for (error of petForm.weight().errors(); track $index) {
+              <span>{{ error.message }}</span>
+              }
+            </p>
+            }
           </div>
         </div>
 
@@ -111,9 +163,18 @@
             <input
               id="color"
               type="text"
+              [field]="petForm.color"
               class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850"
               placeholder="Ej: Marrón"
             />
+            @if ( isFieldInvalid('color') ) {
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
+              <error-icon />
+              @for (error of petForm.color().errors(); track $index) {
+              <span>{{ error.message }}</span>
+              }
+            </p>
+            }
           </div>
 
           <div class="space-y-2">
@@ -124,9 +185,18 @@
               <input
                 id="birthDate"
                 type="date"
+                [field]="petForm.birthDate"
                 class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850 cursor-pointer"
               />
             </div>
+            @if ( isFieldInvalid('birthDate') ) {
+            <p class="text-sm text-red-400 font-medium flex items-center gap-1">
+              <error-icon />
+              @for (error of petForm.birthDate().errors(); track $index) {
+              <span>{{ error.message }}</span>
+              }
+            </p>
+            }
           </div>
         </div>
 
@@ -138,6 +208,7 @@
           <textarea
             id="observations"
             rows="4"
+            [field]="petForm.observations"
             class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850 resize-y min-h-[120px]"
             placeholder="Información adicional sobre la mascota..."
           ></textarea>
@@ -160,5 +231,9 @@
         </div>
       </form>
     </div>
+
+    <pre>
+      {{ petForm().value() | json }}
+    </pre>
   </div>
 </div>

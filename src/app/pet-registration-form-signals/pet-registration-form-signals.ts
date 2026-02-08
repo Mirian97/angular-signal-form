@@ -1,8 +1,8 @@
-import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core';
 import {
-  Field,
   form,
+  FormField,
   max,
   min,
   minLength,
@@ -26,7 +26,7 @@ interface PetFormData {
 
 @Component({
   selector: 'app-pet-registration-form-signals',
-  imports: [CommonModule, Field, ErrorIcon],
+  imports: [CommonModule, FormField, ErrorIcon, FormField],
   templateUrl: './pet-registration-form-signals.html',
 })
 export class PetRegistrationFormSignals {
@@ -48,7 +48,6 @@ export class PetRegistrationFormSignals {
   petForm = form(this.petModel, (path) => {
     required(path.name, { message: 'El nombre es requerido' });
     minLength(path.name, 2, { message: 'El nombre debe tener al menos 2 caracteres' });
-    // minLength(path.name, 3, { message: 'El nombre debe tener al menos 3 caracteres' });
 
     required(path.type, { message: 'El tipo es requerido' });
     required(path.breed, { message: 'La raza es requerida' });

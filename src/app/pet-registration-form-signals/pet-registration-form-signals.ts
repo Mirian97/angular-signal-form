@@ -74,7 +74,6 @@ export class PetRegistrationFormSignals {
       return null;
     });
 
-    // No puede ser mayor a hoy
     validate(path.birthDate, ({ value }) => {
       if (!value) return null;
       const today = new Date();
@@ -88,7 +87,6 @@ export class PetRegistrationFormSignals {
           kind: 'error',
         };
       }
-
       return null;
     });
   });

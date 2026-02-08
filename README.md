@@ -1,59 +1,148 @@
-# Angular21
+# 🐾 Pet Registration Form — Angular Signals
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+This project was created to **study and practice form handling using Angular Signals**, comparing the traditional **Reactive Forms** approach with the new **Signals-based Forms API (`@angular/forms/signals`)**.
 
-## Development server
+## 🎯 Project Goal
 
-To start a local development server, run:
+- Learn and practice:
+  - `signal`
+  - `form()`
+  - `FormField`
+  - Declarative validations with `required`, `min`, `max`, `minLength`, and `validate`
+- Compare **Reactive Forms vs Signals Forms**
+- Explore a more declarative and reactive way to handle forms in modern Angular
 
-```bash
-ng serve
+## 🧪 What’s Implemented
+
+The project contains **two versions of the same Pet Registration Form**:
+
+### 1️⃣ Reactive Forms Version
+
+📁 `PetRegistrationForm`
+
+- Uses `FormBuilder`, `FormGroup`, and `Validators`
+- Traditional and widely used Angular approach
+- Manual control of form state (`touched`, `invalid`, etc.)
+
+### 2️⃣ Signals Form Version (Project Focus)
+
+📁 `PetRegistrationFormSignals`
+
+This is the main focus of the repository 🚀
+
+#### ✨ Highlights
+
+- Uses `signal` as the **single source of truth**
+- Form creation using `form(model, (path) => { ... })`
+- Centralized and declarative validations
+- Less imperative code
+- Fully reactive form state
+
+## 🧠 Signals Form Structure
+
+### Data model
+
+```ts
+interface PetFormData {
+  name: string;
+  type: string;
+  breed: string;
+  age: number;
+  weight: number;
+  color: string;
+  birthDate: string;
+  gender: string;
+  observations: string;
+}
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Model signal
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```ts
+petModel = signal<PetFormData>(perFormDefaultValues);
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Form creation
 
-```bash
-ng generate --help
+```ts
+petForm = form(this.petModel, (path) => {
+  required(path.name);
+  minLength(path.name, 2);
+
+  required(path.type);
+  required(path.breed);
+  minLength(path.breed, 2);
+
+  min(path.age, 0);
+  max(path.age, 30);
+});
 ```
 
-## Building
+## ✅ Custom validations with `validate`
 
-To build the project run:
+Business rule validation example:
 
-```bash
-ng build
+```ts
+validate(path.type, ({ value }) => {
+  if (value() === 'otro') {
+    return {
+      message: 'Pet type cannot be "other"',
+      kind: 'error',
+    };
+  }
+  return null;
+});
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Birth date validation example:
 
-## Running unit tests
+```ts
+validate(path.birthDate, ({ value }) => {
+  if (!value) return null;
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+  const today = new Date();
+  const birthDate = new Date(value());
 
-```bash
-ng test
+  if (birthDate >= today) {
+    return {
+      message: 'Birth date cannot be in the future',
+      kind: 'error',
+    };
+  }
+  return null;
+});
 ```
 
-## Running end-to-end tests
+## 🚀 Form submission
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```ts
+submit(this.petForm, async () => {
+  console.log('Form submitted');
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  this.onReset();
+});
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- `submit()` ensures:
+  - Full validation
+  - Correct state updates (`touched`, `errors`)
+  - Cleaner async flow
 
-## Additional Resources
+## 🔄 Form reset
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```ts
+onReset() {
+  this.petModel.set(perFormDefaultValues);
+  this.petForm().reset();
+}
+```
+
+## 📌 Key learnings
+
+- Signals-based forms are:
+  - More declarative
+  - Easier to reason about
+  - Less boilerplate-heavy
+
+- Reading form state (`valid`, `invalid`, `errors`) feels more straightforward
+- A strong alternative for new Angular projects

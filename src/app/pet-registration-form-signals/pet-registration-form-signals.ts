@@ -24,6 +24,18 @@ interface PetFormData {
   observations: string;
 }
 
+const perFormDefaultValues: PetFormData = {
+  name: '',
+  type: '',
+  breed: '',
+  age: 0,
+  weight: 0,
+  color: '',
+  birthDate: '',
+  gender: '',
+  observations: '',
+};
+
 @Component({
   selector: 'app-pet-registration-form-signals',
   imports: [CommonModule, FormField, ErrorIcon, FormField],
@@ -33,17 +45,7 @@ export class PetRegistrationFormSignals {
   petTypes = ['perro', 'gato', 'conejo', 'ave', 'hamster', 'otro'];
   genders = ['Macho', 'Hembra'];
 
-  petModel = signal<PetFormData>({
-    name: '',
-    type: '',
-    breed: '',
-    age: 0,
-    weight: 0,
-    color: '',
-    birthDate: '',
-    gender: '',
-    observations: '',
-  });
+  petModel = signal<PetFormData>(perFormDefaultValues);
 
   petForm = form(this.petModel, (path) => {
     required(path.name, { message: 'El nombre es requerido' });
@@ -92,7 +94,7 @@ export class PetRegistrationFormSignals {
   });
 
   isFieldInvalid(fieldName: keyof PetFormData): boolean {
-    const fieldSignal = this.petForm[fieldName]; // this.petForm.name() // age()
+    const fieldSignal = this.petForm[fieldName]; // this.petForm.age()
     if (!fieldSignal) return false;
 
     const field = fieldSignal();
@@ -118,18 +120,7 @@ export class PetRegistrationFormSignals {
   }
 
   onReset() {
-    this.petModel.set({
-      name: '',
-      type: '',
-      breed: '',
-      age: 0,
-      weight: 0,
-      color: '',
-      birthDate: '',
-      gender: '',
-      observations: '',
-    });
-
+    this.petModel.set(perFormDefaultValues);
     this.petForm().reset();
   }
 }

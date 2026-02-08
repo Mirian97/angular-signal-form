@@ -17,10 +17,13 @@
               id="name"
               type="text"
               [formField]="petForm.name"
-              class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850"
+              [class]="
+                isFieldInvalid('name')
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900'
+              "
               placeholder="Ej: Max"
             />
-            <!-- @if ( petForm.name().touched() && petForm.name().errors().length > 0 ) { -->
             @if (isFieldInvalid('name')) {
               <p class="text-sm text-red-400 font-medium flex items-center gap-1">
                 <error-icon />
@@ -37,7 +40,11 @@
             <select
               id="type"
               [formField]="petForm.type"
-              class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850 cursor-pointer"
+              [class]="
+                isFieldInvalid('type')
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900'
+              "
             >
               <option value="" class="text-gray-500 bg-gray-900">Seleccione un tipo</option>
               @for (type of petTypes; track type) {
@@ -63,7 +70,11 @@
               id="breed"
               type="text"
               [formField]="petForm.breed"
-              class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850"
+              [class]="
+                isFieldInvalid('breed')
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900'
+              "
               placeholder="Ej: Labrador"
             />
             @if (isFieldInvalid('breed')) {
@@ -82,7 +93,11 @@
             <select
               id="gender"
               [formField]="petForm.gender"
-              class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850 cursor-pointer"
+              [class]="
+                isFieldInvalid('gender')
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900'
+              "
             >
               <option value="" class="text-gray-500 bg-gray-900">Seleccione un género</option>
               @for (gender of genders; track gender) {
@@ -108,7 +123,11 @@
               id="age"
               type="number"
               [formField]="petForm.age"
-              class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850"
+              [class]="
+                isFieldInvalid('age')
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900'
+              "
               placeholder="Ej: 3"
             />
             @if (isFieldInvalid('age')) {
@@ -128,7 +147,11 @@
               id="weight"
               type="number"
               [formField]="petForm.weight"
-              class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850"
+              [class]="
+                isFieldInvalid('weight')
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900'
+              "
               placeholder="Ej: 15.5"
               step="0.1"
             />
@@ -151,7 +174,11 @@
               id="color"
               type="text"
               [formField]="petForm.color"
-              class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850"
+              [class]="
+                isFieldInvalid('color')
+                  ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900'
+                  : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900'
+              "
               placeholder="Ej: Marrón"
             />
             @if (isFieldInvalid('color')) {
@@ -172,7 +199,11 @@
                 id="birthDate"
                 type="date"
                 [formField]="petForm.birthDate"
-                class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850 cursor-pointer"
+                [class]="
+                  isFieldInvalid('birthDate')
+                    ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900'
+                    : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900'
+                "
               />
             </div>
             @if (isFieldInvalid('birthDate')) {
@@ -193,7 +224,11 @@
             id="observations"
             rows="4"
             [formField]="petForm.observations"
-            class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-900 hover:bg-gray-850 resize-y min-h-[120px]"
+            [class]="
+              isFieldInvalid('observations')
+                ? 'w-full px-4 py-3 border-2 border-red-500 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-900'
+                : 'w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-900'
+            "
             placeholder="Información adicional sobre la mascota..."
           ></textarea>
         </div>
@@ -213,7 +248,7 @@
         </div>
       </form>
     </div>
-    <pre>
+    <pre class="mt-10">
       {{ petForm().value() | json }}
     </pre>
   </div>

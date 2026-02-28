@@ -1,0 +1,175 @@
+<div class="tournament-form p-6">
+  <h1>🏆 Epic Gaming Tournament Registration</h1>
+  <p>Join the ultimate gaming competition! 🎮</p>
+
+  <form [formGroup]="playerForm" (ngSubmit)="registerPlayer()" class="flex flex-col gap-4">
+    <!-- 🎮 Gamer tag -->
+    <div class="field flex flex-col gap-2">
+      <label for="gamertag">Gamertag 🎮</label>
+      <input
+        pInputText
+        id="gamertag"
+        formControlName="gamertag"
+        placeholder="Enter your epic gamertag"
+        class="w-full"
+      />
+
+      @if (isFieldInvalid('gamertag')) {
+        <small class="p-error">Your gamertag is required! 🎮</small>
+      }
+    </div>
+
+    <!-- 📧 Email -->
+    <div class="field flex flex-col gap-2">
+      <label for="email">Email 📧</label>
+      <input
+        pInputText
+        type="email"
+        id="email"
+        formControlName="email"
+        placeholder="your.email@gaming.com"
+        class="w-full"
+      />
+    </div>
+
+    <!-- 🎯 Favorite game -->
+    <div class="field flex flex-col gap-2">
+      <label for="favoriteGame">Favorite Game 🎯</label>
+
+      <p-select
+        id="favoriteGame"
+        formControlName="favoriteGame"
+        [options]="gameOptions"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Choose your weapon..."
+        class="w-full"
+      >
+      </p-select>
+    </div>
+
+    <!-- 🏅 Skill level -->
+    <div class="field flex flex-col gap-2">
+      <label>Skill Level 🏅</label>
+
+      <div class="flex flex-col gap-2">
+        <div class="flex align-items-center gap-2">
+          <p-radioButton
+            name="skillLevel"
+            value="beginner"
+            formControlName="skillLevel"
+            inputId="beginner"
+          />
+          <label for="beginner">🌱 Beginner - Just started my journey</label>
+        </div>
+
+        <div class="flex align-items-center gap-2">
+          <p-radioButton
+            name="skillLevel"
+            value="intermediate"
+            formControlName="skillLevel"
+            inputId="intermediate"
+          />
+          <label for="intermediate">⚡ Intermediate - Getting the hang of it</label>
+        </div>
+
+        <div class="flex align-items-center gap-2">
+          <p-radioButton
+            name="skillLevel"
+            value="advanced"
+            formControlName="skillLevel"
+            inputId="advanced"
+          />
+          <label for="advanced">🔥 Advanced - Serious gamer mode</label>
+        </div>
+
+        <div class="flex align-items-center gap-2">
+          <p-radioButton name="skillLevel" value="pro" formControlName="skillLevel" inputId="pro" />
+          <label for="pro">👑 Pro - I live and breathe gaming</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 👥 Team name -->
+    <div class="field flex flex-col gap-2">
+      <label for="teamName">Team Name (Optional) 👥</label>
+      <input
+        pInputText
+        id="teamName"
+        formControlName="teamName"
+        placeholder="The Code Crushers"
+        class="w-full"
+      />
+    </div>
+
+    <!-- 💬 Discord -->
+    <div class="field flex flex-col gap-2">
+      <label for="discordHandle">Discord Handle 💬</label>
+      <input
+        pInputText
+        id="discordHandle"
+        formControlName="discordHandle"
+        placeholder="epicgamer#1234"
+        class="w-full"
+      />
+    </div>
+
+    <!-- 🎂 Age -->
+    <div class="field flex flex-col gap-2">
+      <label for="age">Age 🎂</label>
+
+      <p-inputNumber inputId="age" formControlName="age" [min]="13" class="w-full"> </p-inputNumber>
+
+      @if (isFieldInvalid('age')) {
+        <small class="p-error"> You must be at least 13 years old to participate! 🎂 </small>
+      }
+    </div>
+
+    <!-- ✅ Terms -->
+    <div class="field-checkbox flex align-items-center gap-2">
+      <p-checkbox formControlName="acceptTerms" [binary]="true" inputId="acceptTerms" />
+      <label for="acceptTerms"> I accept the tournament rules and terms ✅ </label>
+    </div>
+
+    @if (isFieldInvalid('acceptTerms')) {
+      <small class="p-error"> You must accept the terms to participate! 📜 </small>
+    }
+
+    <!-- 🚀 Register -->
+    <p-button
+      type="submit"
+      label="🏆 Register for Tournament"
+      [disabled]="playerForm.invalid"
+      styleClass="p-button-success"
+    >
+    </p-button>
+  </form>
+
+  <!-- 📊 Preview -->
+  @if (playerForm.valid) {
+    <div class="registration-stats mt-6">
+      <h3>Registration Preview 👁️</h3>
+
+      <div class="player-card p-4 border-round surface-card shadow-2">
+        <h4>{{ playerForm.get('gamertag')?.value }} 🎮</h4>
+
+        <p>
+          <strong>Game:</strong>
+          {{ getGameEmoji() }} {{ playerForm.get('favoriteGame')?.value }}
+        </p>
+
+        <p>
+          <strong>Skill:</strong>
+          {{ getSkillEmoji() }} {{ playerForm.get('skillLevel')?.value }}
+        </p>
+
+        @if (playerForm.get('teamName')?.value) {
+          <p>
+            <strong>Team:</strong>
+            👥 {{ playerForm.get('teamName')?.value }}
+          </p>
+        }
+      </div>
+    </div>
+  }
+</div>

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { PetRegistrationFormSignals } from './pet-registration-form-signals/pet-registration-form-signals';
 import { PetRegistrationForm } from './pet-registration-form/pet-registration-form';
 import { ProductReviewForm } from './product-review-form/product-review-form';
+import { TournamentRegistration } from './tournament-registration/tournament-registration';
 
 export const routes: Routes = [
   {
@@ -15,6 +16,10 @@ export const routes: Routes = [
   {
     path: 'product-review-form',
     component: ProductReviewForm,
+  },
+  {
+    path: 'tournament-registration',
+    component: TournamentRegistration,
   },
   {
     path: '',

@@ -1,1 +1,73 @@
-<p>dynamic-skill-form works!</p>
+<form [formGroup]="skillsForm" (ngSubmit)="saveSkills()" class="flex flex-col gap-4 p-6">
+  <h2>Your Skills Portfolio 🎯</h2>
+  <div formArrayName="skills" class="flex flex-col gap-4">
+    @for (skillGroup of skillsArray.controls; track $index) {
+      <div
+        [formGroupName]="$index"
+        class="p-4 border-round surface-card shadow-2 flex flex-col gap-3"
+      >
+        <h4>Skill #{{ $index + 1 }} ⚡</h4>
+        <div class="grid gap-2">
+          <div class="col-12 md:col-4">
+            <label for="name-{{ $index }}">Skill Name</label>
+            <input
+              pInputText
+              id="name-{{ $index }}"
+              formControlName="name"
+              placeholder="Skill name (e.g. TypeScript)"
+              class="w-full"
+            />
+          </div>
+          <div class="col-12 md:col-3">
+            <label for="level-{{ $index }}">Level (1-10)</label>
+            <p-inputNumber
+              inputId="level-{{ $index }}"
+              formControlName="level"
+              [min]="1"
+              [max]="10"
+              class="w-full"
+            >
+            </p-inputNumber>
+          </div>
+          <div class="col-12 md:col-3">
+            <label for="years-{{ $index }}">Years of Experience</label>
+            <p-inputNumber
+              inputId="years-{{ $index }}"
+              formControlName="yearsOfExperience"
+              [min]="0"
+              class="w-full"
+            >
+            </p-inputNumber>
+          </div>
+          <div class="col-12 md:col-2 flex align-items-end">
+            <p-button
+              type="button"
+              icon="pi pi-trash"
+              label="Remove"
+              styleClass="p-button-danger w-full"
+              (onClick)="removeSkill($index)"
+            >
+            </p-button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  <div class="flex gap-3">
+    <p-button
+      type="button"
+      icon="pi pi-plus"
+      label="Add Another Skill"
+      styleClass="p-button-secondary"
+      (onClick)="addSkill()"
+    >
+    </p-button>
+    <p-button
+      type="submit"
+      icon="pi pi-save"
+      label="Save Skills Portfolio"
+      [disabled]="skillsForm.invalid"
+    >
+    </p-button>
+  </div>
+</form>

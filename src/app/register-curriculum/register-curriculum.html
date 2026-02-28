@@ -1,0 +1,267 @@
+<div
+  class="min-h-screen bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 py-12 px-4 sm:px-6 lg:px-8"
+>
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-gray-100 mb-2">Job Application Form</h1>
+      <p class="text-gray-400">Complete your professional profile</p>
+    </div>
+
+    <div class="bg-gray-800 rounded-2xl shadow-xl p-8 md:p-10 border border-gray-700">
+      <form class="space-y-6" [formGroup]="applicationForm" (submit)="onSubmit($event)" novalidate>
+        <!-- ================= PERSONAL INFO ================= -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- NAME -->
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-gray-300"> Full Name * </label>
+            <input
+              type="text"
+              formControlName="name"
+              class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 bg-gray-900 {{
+                getClassInput(isFieldInvalid('name'))
+              }}"
+              placeholder="John Doe"
+            />
+            @if (isFieldInvalid('name')) {
+              <p class="text-sm text-red-400 font-medium">
+                @if (applicationForm.get('name')?.errors?.['required']) {
+                  Full name is required.
+                }
+                @if (applicationForm.get('name')?.errors?.['minlength']) {
+                  Full name must be at least 3 characters.
+                }
+              </p>
+            }
+          </div>
+
+          <!-- EMAIL -->
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-gray-300"> Email * </label>
+            <input
+              type="email"
+              formControlName="email"
+              class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 bg-gray-900 {{
+                getClassInput(isFieldInvalid('email'))
+              }}"
+              placeholder="john@email.com"
+            />
+            @if (isFieldInvalid('email')) {
+              <p class="text-sm text-red-400 font-medium">
+                @if (applicationForm.get('email')?.errors?.['required']) {
+                  Email is required.
+                }
+                @if (applicationForm.get('email')?.errors?.['email']) {
+                  Please enter a valid email address.
+                }
+              </p>
+            }
+          </div>
+
+          <!-- PHONE -->
+          <div class="space-y-2 md:col-span-2">
+            <label class="block text-sm font-semibold text-gray-300"> Phone * </label>
+            <input
+              type="text"
+              formControlName="phone"
+              class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 bg-gray-900 *{{
+                getClassInput(isFieldInvalid('phone'))
+              }}"
+              placeholder="+55 11 99999-9999"
+            />
+            @if (isFieldInvalid('phone')) {
+              <p class="text-sm text-red-400 font-medium">
+                @if (applicationForm.get('phone')?.errors?.['required']) {
+                  Phone number is required.
+                }
+                @if (applicationForm.get('phone')?.errors?.['minlength']) {
+                  Phone must be at least 8 digits.
+                }
+              </p>
+            }
+          </div>
+        </div>
+
+        <!-- ================= WORK EXPERIENCE ================= -->
+        <div formArrayName="workExperience" class="gap-y-6 flex flex-col">
+          <h2 class="text-xl font-bold text-gray-100">💼 Work Experience</h2>
+          <div class="divide-gray-500 space-y-6 divide-y">
+            @for (job of workArray.controls; let i = $index; track i) {
+              <div
+                [formGroupName]="i"
+                class="relative grid grid-cols-1 md:grid-cols-2 gap-6 pb-6 last:pb-0"
+              >
+                @if (i >= 1) {
+                  <button
+                    (click)="removeWorkExperience(i)"
+                    class="absolute -top-4 right-4 font-semibold leading-0 size-7 rounded-2xl self-start text-sm bg-red-600 hover:bg-red-700 text-white p-1 cursor-pointer"
+                  >
+                    -
+                  </button>
+                }
+                <div class="space-y-2">
+                  <input
+                    type="text"
+                    formControlName="company"
+                    placeholder="Company"
+                    class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 bg-gray-900"
+                  />
+                  @if (job.get('company')?.invalid && job.get('company')?.touched) {
+                    <p class="text-sm text-red-400 font-medium">Company is required.</p>
+                  }
+                </div>
+
+                <div class="space-y-2">
+                  <input
+                    type="text"
+                    formControlName="role"
+                    placeholder="Role"
+                    class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 bg-gray-900"
+                  />
+                  @if (job.get('role')?.invalid && job.get('role')?.touched) {
+                    <p class="text-sm text-red-400 font-medium">Role is required.</p>
+                  }
+                </div>
+
+                <input
+                  type="date"
+                  formControlName="startDate"
+                  class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 bg-gray-900"
+                />
+
+                <input
+                  type="date"
+                  formControlName="endDate"
+                  class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 bg-gray-900"
+                />
+              </div>
+            }
+          </div>
+          <button
+            (click)="addWorkExperience()"
+            class="cursor text-sm mx-auto bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg"
+          >
+            Add Experience
+          </button>
+        </div>
+
+        <!-- ================= EDUCATION ================= -->
+        <div formArrayName="education" class="gap-y-6 flex flex-col">
+          <h2 class="text-xl font-bold text-gray-100">🎓 Education</h2>
+
+          <div class="divide-gray-500 space-y-6 divide-y">
+            @for (edu of educationArray.controls; let i = $index; track i) {
+              <div
+                [formGroupName]="i"
+                class="relative grid grid-cols-1 md:grid-cols-2 gap-6 pb-6 last:pb-0"
+              >
+                @if (i >= 1) {
+                  <button
+                    (click)="removeEducation(i)"
+                    class="absolute -top-4 right-4 font-semibold leading-0 size-7 rounded-2xl self-start text-sm bg-red-600 hover:bg-red-700 text-white p-1 cursor-pointer"
+                  >
+                    -
+                  </button>
+                }
+                <div class="space-y-2">
+                  <input
+                    type="text"
+                    formControlName="institution"
+                    placeholder="Institution"
+                    class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 bg-gray-900"
+                  />
+                  @if (edu.get('institution')?.invalid && edu.get('institution')?.touched) {
+                    <p class="text-sm text-red-400 font-medium">Institution is required.</p>
+                  }
+                </div>
+
+                <div>
+                  <input
+                    type="text"
+                    formControlName="degree"
+                    placeholder="Degree"
+                    class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 bg-gray-900"
+                  />
+                  @if (edu.get('degree')?.invalid && edu.get('degree')?.touched) {
+                    <p class="text-sm text-red-400 font-medium">Degree is required.</p>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+
+          <button
+            (click)="addEducation()"
+            class="cursor text-sm mx-auto bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg"
+          >
+            Add Education
+          </button>
+        </div>
+
+        <!-- RESUME -->
+        <div class="space-y-2">
+          <label class="block text-sm font-semibold text-gray-300"> 📎 Upload Resume </label>
+          <input
+            type="file"
+            formControlName="resume"
+            class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 bg-gray-900 {{
+              getClassInput(isFieldInvalid('resume'))
+            }}"
+          />
+          @if (isFieldInvalid('resume')) {
+            <p class="text-sm text-red-400 font-medium">Resume file is required.</p>
+          }
+        </div>
+
+        <!-- SALARY -->
+        <div class="space-y-2">
+          <label class="block text-sm font-semibold text-gray-300"> 💰 Salary Expectations </label>
+          <input
+            type="number"
+            formControlName="salary"
+            class="w-full px-4 py-3 border-2 border-gray-600 rounded-lg text-gray-100 bg-gray-900 {{
+              getClassInput(isFieldInvalid('salary'))
+            }}"
+          />
+          @if (isFieldInvalid('salary')) {
+            <p class="text-sm text-red-400 font-medium">Salary cannot be negative.</p>
+          }
+        </div>
+
+        <!-- CONSENT -->
+        <div class="flex flex-col gap-3 pt-4">
+          <label class="flex items-center gap-2 text-gray-300">
+            <input type="checkbox" formControlName="terms" />
+            I accept the terms and conditions
+          </label>
+          @if (isFieldInvalid('terms')) {
+            <p class="text-sm text-red-400 font-medium">
+              You must accept the terms and conditions.
+            </p>
+          }
+
+          <label class="flex items-center gap-2 text-gray-300">
+            <input type="checkbox" formControlName="privacy" />
+            I agree to privacy policy
+          </label>
+          @if (isFieldInvalid('privacy')) {
+            <p class="text-sm text-red-400 font-medium">You must agree to the privacy policy.</p>
+          }
+        </div>
+
+        <!-- BUTTON -->
+        <div class="flex pt-6 border-t border-gray-700">
+          <button
+            type="submit"
+            class="flex-1 px-6 py-3.5 text-base font-semibold text-white bg-linear-to-r from-blue-600 to-indigo-600 rounded-lg shadow-md hover:from-blue-500 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+          >
+            Submit Application
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <pre class="mt-10">
+      {{ applicationForm.value | json }}
+    </pre>
+  </div>
+</div>

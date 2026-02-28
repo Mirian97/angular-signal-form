@@ -1,0 +1,103 @@
+<div class="review-form-container p-6">
+  <h2>Share Your Experience! 🌟</h2>
+  <form
+    [formGroup]="reviewForm"
+    (ngSubmit)="submitReview()"
+    class="review-form flex flex-col gap-4"
+  >
+    <!-- ⭐ Rating -->
+    <div class="field">
+      <label for="rating">Overall Rating ⭐</label>
+      <p-rating formControlName="rating" inputId="rating"> </p-rating>
+
+      @if (isFieldInvalid('rating')) {
+        <small class="p-error">Please select a rating! 🌟</small>
+      }
+    </div>
+    <!-- 📝 Title -->
+    <div class="field">
+      <label for="title">Review Title 📝</label>
+      <input
+        pInputText
+        id="title"
+        formControlName="title"
+        placeholder="Summarize your experience..."
+        class="w-full"
+      />
+
+      @if (isFieldInvalid('title')) {
+        <small class="p-error"> Please provide a title for your review! 📝 </small>
+      }
+    </div>
+    <!-- 💬 Comment -->
+    <div class="field">
+      <label for="comment">Your Review 💬</label>
+
+      <textarea
+        pInputTextarea
+        id="comment"
+        formControlName="comment"
+        rows="4"
+        [autoResize]="true"
+        maxlength="500"
+        class="w-full"
+      >
+      </textarea>
+
+      <div class="character-count">
+        {{ reviewForm.get('comment')?.value?.length || 0 }}/500 characters
+      </div>
+
+      @if (isFieldInvalid('comment')) {
+        <div class="p-error">
+          @if (reviewForm.get('comment')?.errors?.['required']) {
+            <small>Please share your thoughts! 💭</small>
+          }
+          @if (reviewForm.get('comment')?.errors?.['maxlength']) {
+            <small>Review is too long! Keep it under 500 characters 📏</small>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- 👍 Recommend -->
+    <div class="field-checkbox">
+      <p-checkbox formControlName="recommend" [binary]="true" inputId="recommend"> </p-checkbox>
+      <label for="recommend"> Would you recommend this product? 👍 </label>
+    </div>
+
+    <!-- 👤 Name -->
+    <div class="field">
+      <label for="reviewerName">Your Name (Optional) 👤</label>
+      <input
+        pInputText
+        id="reviewerName"
+        formControlName="reviewerName"
+        placeholder="Anonymous"
+        class="w-full"
+      />
+    </div>
+
+    <!-- 🚀 Submit -->
+    <p-button
+      type="submit"
+      [disabled]="reviewForm.invalid"
+      [label]="reviewForm.invalid ? 'Complete Your Review 📝' : 'Submit Review 🚀'"
+    >
+    </p-button>
+  </form>
+  @if (reviewForm.valid) {
+    <div class="review-preview">
+      <h3>Preview Your Review 👁️</h3>
+      <div class="preview-content">
+        <p-rating [readonly]="true" formControlName="reviewForm.get('rating').value"> </p-rating>
+        <h4>{{ reviewForm.get('title')?.value }}</h4>
+        <p>{{ reviewForm.get('comment')?.value }}</p>
+        <small>
+          By {{ reviewForm.get('reviewerName')?.value || 'Anonymous' }}
+          {{ reviewForm.get('recommend')?.value ? '• Recommends this product 👍' : '' }}
+        </small>
+      </div>
+    </div>
+  }
+</div>
